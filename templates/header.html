@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Navbar Example</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+    <div class="container">
+
+        <!-- İsim Soyisim veya Marka İsmi -->
+        <a class="navbar-brand font-weight-bold" href="{% url 'home' %}">Django Dersleri</a>
+
+        <!-- Telefon ekranları için menü butonu -->
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <!-- Arama Çubuğu -->
+            <form class="form-inline my-2 my-lg-0 ml-lg-3" role="search" method="GET" action="">
+                <input class="form-control mr-2" type="search" name="q" placeholder="Blog'da Ara" aria-label="Search" value="{{ request.GET.q }}">
+                <button class="btn btn-primary" type="submit">Ara</button>
+            </form>
+
+            <!-- Temel Sayfalar -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-light font-weight-semibold" href="{% url 'home' %}">Anasayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light font-weight-semibold" href="{% url 'post:index' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light font-weight-semibold" href="#">Hakkımda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light font-weight-semibold" href="#">İletişim</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light font-weight-semibold" href="{% url 'post:create' %}">Yazı Ekle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light font-weight-semibold" href="{% url 'accounts:logout' %}">Çıkış Yap</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light font-weight-semibold" href="{% url 'accounts:register' %}">Üye Ol</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light font-weight-semibold" href="{% url 'accounts:login' %}">Giriş Yap</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+<!-- Navbar End -->
+
+<!-- Example page content -->
+<div class="container" style="margin-top: 80px;">
+    <h1>Welcome to Django Dersleri</h1>
+    <p>This is a sample content to demonstrate the fixed navbar.</p>
+    <!-- Add more content here to see the effect of the fixed navbar -->
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
